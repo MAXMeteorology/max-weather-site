@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAX Weather</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #eef2f7; color: #333; }
+    header, footer { background: #2a2a72; color: white; padding: 1em; text-align: center; }
+    nav a { margin: 0 15px; color: white; text-decoration: none; }
+    main { padding: 1em; max-width: 1000px; margin: auto; }
+    section { margin-bottom: 2em; }
+    iframe, img { max-width: 100%; height: auto; }
+    form { background: #fff; padding: 1em; border-radius: 8px; }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; }
+    button { background: #2a2a72; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MAX Weather</h1>
+    <nav>
+      <a href="#youtube">YouTube</a>
+      <a href="#weather">Live Weather</a>
+      <a href="#spc">SPC Outlooks</a>
+      <a href="#radar">Radar</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="youtube">
+      <h2>Latest YouTube Video</h2>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <section id="weather">
+      <h2>Live Weather (Your Location)</h2>
+      <div id="weatherData">Loading weather...</div>
+      <script>
+        async function getWeather() {
+          const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+          const city = 'New York'; // Change this to your city
+          const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`);
+          const data = await res.json();
+          document.getElementById('weatherData').innerHTML = `${data.name}: ${data.main.temp}°F, ${data.weather[0].description}`;
+        }
+        getWeather();
+      </script>
+    </section>
+
+    <section id="spc">
+      <h2>SPC Outlooks</h2>
+      <img src="https://www.spc.noaa.gov/products/outlook/day1otlk_0600.gif" alt="Day 1 Outlook">
+    </section>
+
+    <section id="radar">
+      <h2>Live Radar</h2>
+      <iframe src="https://www.rainviewer.com/map.html" width="100%" height="500"></iframe>
+    </section>
+
+    <section id="blog">
+      <h2>Blog</h2>
+      <p><strong>5/17/2025</strong> — Welcome to MAX Weather! We’re here to teach Meteorology and keep you informed.</p>
+      <!-- Add more blog posts as needed -->
+    </section>
+
+    <section id="twitter">
+      <h2>Latest on X (Twitter)</h2>
+      <a class="twitter-timeline" data-width="400" data-height="500" href="https://twitter.com/YOUR_USERNAME?ref_src=twsrc%5Etfw">Tweets by YOUR_USERNAME</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MAX Weather. All rights reserved.</p>
+  </footer>
+</body>
+</html>
